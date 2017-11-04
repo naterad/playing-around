@@ -1,13 +1,37 @@
 const express = require('express');
+const mysql = require('mysql');
 const app = express();
+const connection = mysql.createConnection({
+ host     : 'x3ztd854gaa7on6s.cbetxkdyhwsb.us-east-1.rds.amazonaws.com	',
+ user     : 'ci77wdcljiikf94c',
+ password : 'utg7yhluawxippi0',
+ database : 'ye3aswd5ea8hq56x'
+});
 
-var port = process.env.PORT || 8080;
+connection.connect(function(err){
+if(!err) {
+   console.log("Database is connected ... \n\n");
+} else {
+   console.log("Error connecting database ... \n\n");
+}
+});
+
+let port = process.env.PORT || 8080;
 
 app.get('/', function (req, res) {
   res.send('This is the home page;')
 })
 app.get('/test', function (req, res) {
-  res.send('This is the test get;')
+  connection.query('SELECT * from coordinates', function(err, rows, fields) {
+  // connection.end();
+    if (!err)
+      console.log('The solution is: ', rows);
+      res.send('The solution is: ', rows)
+    else
+      console.log('Error while performing Query.');
+      res.send('Error while performing Query.')
+    });
+  // res.send('This is the test get;')
 })
 app.post('/test', function (req, res) {
   res.send('This is the test post;')
