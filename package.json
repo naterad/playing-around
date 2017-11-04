@@ -7,6 +7,9 @@
     "start": "npm install && node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "engines": {
+    "node": "8.9.0"
+  },
   "author": "Nathan Radmall",
   "license": "ISC",
   "dependencies": {
