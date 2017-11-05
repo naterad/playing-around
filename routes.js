@@ -2,6 +2,13 @@ const express = require('express');
 const router = new express.Router();
 const coordinatesController = require('./controllers/coordinatesController');
 
+router.use(function(req, res, next) {
+		//allow CORS
+		res.header("Access-Control-Allow-Origin", "*");
+		res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+		//keep moving on after log
+		next();
+	});
 
 router.route('/')
   .get(coordinatesController.getBlank);
