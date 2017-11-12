@@ -1,6 +1,7 @@
 const express = require('express');
 const router = new express.Router();
 const coordinatesController = require('./controllers/coordinatesController');
+const userController = require('./controllers/userController');
 
 router.use(function(req, res, next) {
 		//allow CORS
@@ -10,14 +11,13 @@ router.use(function(req, res, next) {
 		next();
 	});
 
-router.route('/')
-  .get(coordinatesController.getBlank);
+router.route('/').get(coordinatesController.getBlank);
+router.route('/junk').get(coordinatesController.getTest);
+router.route('/test').post(coordinatesController.postTest);
+router.route('/api/coords/email').post(coordinatesController.getCoordinatesByEmail);
 
-router.route('/test')
-  .get(coordinatesController.getTest);
+router.route('/api/login').post(userController.login);
 
-router.route('/test')
-  .post(coordinatesController.postTest);
 
 module.exports = router;
 
