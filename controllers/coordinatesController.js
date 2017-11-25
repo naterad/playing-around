@@ -1,5 +1,6 @@
 const coordinates = require('../db/models/coordinates');
 const user = require('../db/models/user');
+const stores = require('../db/models/stores');
 
 async function getBlank(req, res, next) {
   res.send('API is up and working!');
@@ -36,9 +37,24 @@ async function getCoordinatesByEmail(req, res, next) {
   }
 }
 
+async function getStoreCoordinates24Hours(req, res, next) {
+  try {
+    const tableName = await stores.getTableNameById(req.body);
+    if(!tableName || tableName.length != 1) {
+      next('Could not find users table');
+    }
+    console.log(tableName);
+    const result = await coordinates.getCoordinatesByTableName24(tableName[0]);
+    res.send(result);
+  } catch(error) {
+    next(error);
+  }
+}
+
 module.exports = {
   getBlank,
   getTest,
   postTest,
   getCoordinatesByEmail,
+  getStoreCoordinates24Hours,
 }

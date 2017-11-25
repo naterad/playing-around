@@ -56,9 +56,29 @@ function getCoordinatesByTableName(data) {
   });
 }
 
+// right now it is set to past 100 days
+function getCoordinatesByTableName24(data) {
+  return new Promise(async (resolve, reject) => {
+    const connection = await db.getConnection();
+    if(!connection) {
+      return reject('Failed to get connection');
+    }
+    const query = `SELECT * from ${data.table_name}
+    WHERE received_at >= now() - INTERVAL 100 DAY;`;
+    const params = [];
+    connection.query(query, params, (err, rows, fields) => {
+      if(db.queryError(err, connection)) {
+        return reject('Query failed');
+      }
+      db.forceConnectionRelease(connection);
+      return resolve(rows);
+    });
+  });
+}
 
 module.exports = {
   getCoordinates,
   postCoordinates,
   getCoordinatesByTableName,
+  getCoordinatesByTableName24,
 }

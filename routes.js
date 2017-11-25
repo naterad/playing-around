@@ -2,6 +2,7 @@ const express = require('express');
 const router = new express.Router();
 const coordinatesController = require('./controllers/coordinatesController');
 const userController = require('./controllers/userController');
+const storesController = require('./controllers/storesController');
 
 router.use(function(req, res, next) {
 		//allow CORS
@@ -15,6 +16,8 @@ router.route('/').get(coordinatesController.getBlank);
 router.route('/junk').get(coordinatesController.getTest);
 router.route('/test').post(coordinatesController.postTest);
 router.route('/api/coords/email').post(coordinatesController.getCoordinatesByEmail);
+router.route('/api/coords/24').post(coordinatesController.getStoreCoordinates24Hours);
+router.route('/api/stores/email').post(storesController.getStores);
 
 router.route('/api/login').post(userController.login);
 
