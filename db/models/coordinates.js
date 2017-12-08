@@ -38,6 +38,29 @@ function postCoordinates(data) {
   });
 }
 
+function postCoordinatesBatch(req, data) {
+  return new Promise(async (resolve, reject) => {
+    const connection = await db.getConnection();
+    if(!connection) {
+      return reject('Failed to get connection');
+    }
+    console.log(req);
+    // console.log(data);
+    // const query = 'INSERT INTO `junk_coordinates` (`data`) VALUES (?)';
+    // const params = [
+    //   JSON.stringify(data)
+    // ];
+    // connection.query(query, params, (err, rows, fields) => {
+    //   if(db.queryError(err, connection)) {
+    //     return reject('Query failed');
+    //   }
+    //   db.forceConnectionRelease(connection);
+    //   return resolve();
+    // });
+  });
+}
+
+
 function getCoordinatesByTableName(data) {
   return new Promise(async (resolve, reject) => {
     const connection = await db.getConnection();

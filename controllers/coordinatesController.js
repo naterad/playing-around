@@ -24,6 +24,15 @@ async function postTest(req, res, next) {
   }
 }
 
+async function postTestBatch(req, res, next) {
+  try {
+    await coordinates.postCoordinatesBatch(req, req.body);
+    res.send({success: true});
+  } catch(error) {
+    next(error);
+  }
+}
+
 async function getCoordinatesByEmail(req, res, next) {
   try {
     const tableName = await user.getDefaultTableNameByEmail(req.body);

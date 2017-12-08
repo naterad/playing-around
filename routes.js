@@ -15,6 +15,7 @@ router.use(function(req, res, next) {
 router.route('/').get(coordinatesController.getBlank);
 router.route('/junk').get(coordinatesController.getTest);
 router.route('/test').post(coordinatesController.postTest);
+router.route('/testbatch').post(coordinatesController.postTestBatch);
 router.route('/api/coords/email').post(coordinatesController.getCoordinatesByEmail);
 router.route('/api/coords/24').post(coordinatesController.getStoreCoordinates24Hours);
 router.route('/api/stores/email').post(storesController.getStores);
