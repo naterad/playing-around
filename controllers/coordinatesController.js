@@ -63,6 +63,7 @@ async function getStoreCoordinates24Hours(req, res, next) {
 module.exports = {
   getBlank,
   getTest,
+  postTestBatch,
   postTest,
   getCoordinatesByEmail,
   getStoreCoordinates24Hours,

@@ -102,6 +102,7 @@ function getCoordinatesByTableName24(data) {
 module.exports = {
   getCoordinates,
   postCoordinates,
+  postCoordinatesBatch,
   getCoordinatesByTableName,
   getCoordinatesByTableName24,
 }
